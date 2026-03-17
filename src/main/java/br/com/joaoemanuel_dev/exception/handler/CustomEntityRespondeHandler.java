@@ -11,10 +11,12 @@ import org.springframework.web.servlet.mvc.method.annotation.*;
 
 import java.util.Date;
 
+// tratamentos de exceção genéricos para caso não haver nenhum tratamento específico
 @ControllerAdvice
 @RestController
 public class CustomEntityRespondeHandler extends ResponseEntityExceptionHandler {
 
+    // tratamento de exceção genéricos para caso não haver nenhum tratamento específico
     @ExceptionHandler(Exception.class)
     public final ResponseEntity<ExceptionResponse> handleAllExceptions(Exception ex, WebRequest request){
         ExceptionResponse response = new ExceptionResponse(
@@ -24,6 +26,7 @@ public class CustomEntityRespondeHandler extends ResponseEntityExceptionHandler 
         return new ResponseEntity<>(response, HttpStatus.INTERNAL_SERVER_ERROR);
     }
 
+    // retorno do json estruturado
     @ExceptionHandler(UnsupportedOperationException.class)
     public final ResponseEntity<ExceptionResponse> handleBadRequestExceptions(Exception ex, WebRequest request){
         ExceptionResponse response = new ExceptionResponse(
